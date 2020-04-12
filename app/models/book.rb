@@ -5,6 +5,8 @@ class Book < ActiveRecord::Base
   has_many :users, through: :checkouts
 
   def self.available_books
-    Book.all.select(!self.checkedout)
+    Book.all.select do |b|
+      !b.checkedout
+    end
   end
 end
